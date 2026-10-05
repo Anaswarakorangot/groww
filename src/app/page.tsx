@@ -1,11 +1,15 @@
 'use client';
 
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getTotalVerified } from '@/lib/store';
 
 function HomeContent() {
-  const totalRegistered = getTotalVerified() + 127; // Add base count for demo
+  const [totalRegistered, setTotalRegistered] = useState(127);
+
+  useEffect(() => {
+    setTotalRegistered(getTotalVerified() + 127);
+  }, []);
 
   return (
     <main className="min-h-screen overflow-hidden">

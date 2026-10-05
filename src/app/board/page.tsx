@@ -8,17 +8,19 @@ import Link from 'next/link';
 export default function BoardPage() {
   const [colleges, setColleges] = useState<College[]>([]);
   const [totalVerified, setTotalVerified] = useState(0);
-  const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [lastUpdatedText, setLastUpdatedText] = useState('--:--:--');
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const updateData = () => {
       setColleges(getColleges());
       setTotalVerified(getTotalVerified());
-      setLastUpdated(new Date());
+      setLastUpdatedText(new Date().toLocaleTimeString('en-US', { hour12: true }));
     };
 
     updateData();
-    const interval = setInterval(updateData, 60000); // Refresh every 60 seconds
+    const interval = setInterval(updateData, 60000);
 
     return () => clearInterval(interval);
   }, []);
@@ -62,7 +64,7 @@ export default function BoardPage() {
           </div>
 
           <p className="text-xs text-neutral-500">
-            Last updated: {lastUpdated.toLocaleTimeString()} · Refreshes every 60s
+            Last updated: {lastUpdatedText} · Refreshes every 60s
           </p>
         </div>
 

@@ -322,15 +322,39 @@ function ResultContent() {
             </a>
           </div>
         ) : (
-          <div className="bg-gradient-to-br from-green-500/10 to-teal-500/5 border border-green-500/30 rounded-2xl p-6 text-center animate-slide-up">
-            <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-              </svg>
+          <>
+            <div className="bg-gradient-to-br from-green-500/10 to-teal-500/5 border border-green-500/30 rounded-2xl p-6 text-center animate-slide-up">
+              <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="font-bold text-xl text-green-400 mb-1">Verified!</h3>
+              <p className="text-neutral-400">Check WhatsApp for your workshop link</p>
             </div>
-            <h3 className="font-bold text-xl text-green-400 mb-1">Verified!</h3>
-            <p className="text-neutral-400">Check WhatsApp for your workshop link and ATS template</p>
-          </div>
+
+            {/* Free ATS Template */}
+            <div className="bg-gradient-to-br from-teal-500/10 to-orange-500/5 border border-teal-500/20 rounded-2xl p-6 animate-slide-up">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl">🎁</span>
+                </div>
+                <div>
+                  <h3 className="font-bold text-lg text-teal-400">Your Free ATS Resume Template</h3>
+                  <p className="text-sm text-neutral-400">Optimized to pass ATS screening systems</p>
+                </div>
+              </div>
+              <Link
+                href="/template"
+                className="block w-full py-4 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 rounded-xl font-semibold text-center transition-all hover:scale-[1.02] hover:shadow-lg hover:shadow-teal-500/20"
+              >
+                Download ATS Template
+              </Link>
+              <p className="text-xs text-neutral-500 text-center mt-3">
+                Edit directly in browser, save as PDF
+              </p>
+            </div>
+          </>
         )}
 
         {/* Rank Card */}

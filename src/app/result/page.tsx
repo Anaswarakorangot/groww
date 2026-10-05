@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { getFromSession, getCollegeRank, getCollegeByName, verifyRegistration, saveToSession } from '@/lib/store';
 import { Registration } from '@/types';
 import Link from 'next/link';
+import confetti from 'canvas-confetti';
 
 function ResultContent() {
   const router = useRouter();
@@ -15,6 +16,38 @@ function ResultContent() {
   const [verified, setVerified] = useState(false);
   const [cardImageUrl, setCardImageUrl] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const confettiFired = useRef(false);
+
+  // Fire confetti on mount
+  useEffect(() => {
+    if (!confettiFired.current) {
+      confettiFired.current = true;
+      // First burst
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#f97316', '#14b8a6', '#ffffff', '#fbbf24']
+      });
+      // Second burst after delay
+      setTimeout(() => {
+        confetti({
+          particleCount: 50,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 },
+          colors: ['#f97316', '#14b8a6', '#ffffff']
+        });
+        confetti({
+          particleCount: 50,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 },
+          colors: ['#f97316', '#14b8a6', '#ffffff']
+        });
+      }, 250);
+    }
+  }, []);
 
   useEffect(() => {
     const reg = getFromSession<Registration>('registration');
@@ -44,6 +77,13 @@ function ResultContent() {
         setCollegeData({ verifiedCount: college.verifiedCount, goal: college.goal });
         setCollegeRank(getCollegeRank(registration.college));
       }
+      // Celebration confetti for verification
+      confetti({
+        particleCount: 80,
+        spread: 100,
+        origin: { y: 0.7 },
+        colors: ['#22c55e', '#14b8a6', '#ffffff']
+      });
       saveToSession('verified', true);
     }
   };
